@@ -57,13 +57,16 @@ public class SecurityConfig {
                 http.authorizeHttpRequests((authorize) ->
 
                         authorize
-                                .requestMatchers("/api/auth/**").permitAll()
+                                .requestMatchers("/api/v1/auth/**").permitAll()
+                                .requestMatchers("/v3/api-docs/**").permitAll()
+                                .requestMatchers("/swagger-ui/**").permitAll()
+                                .requestMatchers("/swagger-ui.html").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
-                                .requestMatchers(HttpMethod.POST,"/api/posts").hasAnyRole("USER","ADMIN")
-                                .requestMatchers(HttpMethod.POST,"/api/posts/**").hasAnyRole("USER","ADMIN")
+                                .requestMatchers(HttpMethod.POST,"/api/v1/posts").hasAnyRole("USER","ADMIN")
+                                .requestMatchers(HttpMethod.POST,"/api/v1/posts/**").hasAnyRole("USER","ADMIN")
                                 //.requestMatchers(HttpMethod.PUT,"/api/posts/{PostId}/**").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.PUT,"/api/posts/{PostId}/**").hasAnyRole("USER","ADMIN")
-                                .requestMatchers(HttpMethod.DELETE,"/api/posts/{PostId}").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.PUT,"/api/v1/posts/{PostId}/**").hasAnyRole("USER","ADMIN")
+                                .requestMatchers(HttpMethod.DELETE,"/api/v1/posts/{PostId}").hasRole("ADMIN")
                                 .anyRequest()
                                 .authenticated()
 

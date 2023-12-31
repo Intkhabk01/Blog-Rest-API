@@ -10,6 +10,7 @@ import com.blog.repository.RoleRepository;
 import com.blog.repository.UserRepository;
 import com.blog.security.CustomUserDetailsService;
 import com.blog.security.JwtTokenProvider;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,8 @@ import java.util.Collections;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/v1/auth")
+//@SecurityRequirement(name="bearerAuth")
 public class AuthController {
 
     @Autowired

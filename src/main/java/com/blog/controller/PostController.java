@@ -5,6 +5,9 @@ import com.blog.dto.PostResponse;
 import com.blog.filters.TestFilter;
 import com.blog.service.PostService;
 import com.blog.utils.AppConstants;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +19,8 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/api/posts")
+@RequestMapping("/api/v1/posts")
+@Tag(name = "Post")
 public class PostController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TestFilter.class);
@@ -27,6 +31,21 @@ public class PostController {
         this.postService = postService;
     }
     //get all Posts
+    @Operation(
+            description = "Get End Points for Posts",
+            summary = "This is a summary for Posts get Endpoints",
+            responses = {
+                    @ApiResponse(
+                            description = "Success",
+                            responseCode = "200"
+                    ),
+                    @ApiResponse(
+                            description = "Unauthorized / Invalid Token",
+                            responseCode = "403"
+                    )
+            }
+
+    )
     @GetMapping
     public ResponseEntity<PostResponse> getAllPosts(
             @RequestParam(value = "pageNo",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER,required = false) int pageNO,
